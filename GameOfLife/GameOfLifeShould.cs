@@ -44,22 +44,22 @@ public class GameOfLifeShould
         Assert.AreEqual(expectedOutput, output);
     }
 
-    //
-    // [Test]
-    // public void ApplyNextGeneration_DeadCellsBecameAlive()
-    // {
-    //     var input =
-    //         "**.\n" +
-    //         "*..\n" +
-    //         "...\n";
-    //
-    //     var expectedOutput =
-    //         "**.\n" +
-    //         "**.\n" +
-    //         "...\n";
-    //
-    //     string output = game.Process(input);
-    //
-    //     Assert.AreEqual(expectedOutput, output);
-    // }
+    
+    [Test]
+    public void ApplyNextGeneration_DeadCellsBecameAlive()
+    {
+        var input =
+            "**.\n" +
+            "*..\n" +
+            "...\n";
+    
+        var expectedOutput =
+            "**.\n" +
+            "**.\n" +
+            "...\n";
+    
+        string output = game.Process(input);
+    
+        Assert.AreEqual(expectedOutput, output);
+    }
 }
