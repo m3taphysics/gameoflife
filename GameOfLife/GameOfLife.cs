@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameOfLife;
-
 public class GameOfLife
 {
     private const char AliveCell = '*';
+    private const char DeadCell = '.';
 
     public string Process(string input)
     {
@@ -19,14 +18,31 @@ public class GameOfLife
             for (var column = 0; column < columns; column++)
             {
                 if (IsAlive(lines, row, column))
-                    continue;
-
-                if (CountNeighbors(lines, row, column, AliveCell) == 3)
                 {
-                    var str = output[row];
-                    var charArray = str.ToCharArray();
-                    charArray[column] = AliveCell;
-                    output[row] = new string(charArray);
+                    if (CountNeighbors(lines, row, column, AliveCell) < 2)
+                    {
+                        var str = output[row];
+                        var charArray = str.ToCharArray();
+                        charArray[column] = DeadCell;
+                        output[row] = new string(charArray);
+                    }
+                    else if (CountNeighbors(lines, row, column, AliveCell) > 3)
+                    {
+                        var str = output[row];
+                        var charArray = str.ToCharArray();
+                        charArray[column] = DeadCell;
+                        output[row] = new string(charArray);
+                    }
+                }
+                else
+                {
+                    if (CountNeighbors(lines, row, column, AliveCell) == 3)
+                    {
+                        var str = output[row];
+                        var charArray = str.ToCharArray();
+                        charArray[column] = AliveCell;
+                        output[row] = new string(charArray);
+                    }
                 }
             }
         }
@@ -82,9 +98,9 @@ public class GameOfLife
 
         var counter = 0;
         
-        for (var i = Math.Max(0, row - 1); i <= Math.Min(rows - 1, row); i++)
+        for (var i = Math.Max(0, row - 1); i <= Math.Min(row + 1, rows - 1); i++)
         {
-            for (var j = Math.Max(0, column - 1); j <= Math.Min(columns - 1, column); j++)
+            for (var j = Math.Max(0, column - 1); j <= Math.Min(column + 1, columns - 1); j++)
             {
                 if (i == row && j == column)
                     continue;
