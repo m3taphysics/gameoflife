@@ -21,7 +21,45 @@ public class GameOfLifeShould
             "...\n";
 
         string output = game.Process(input);
-        
+
         Assert.AreEqual(input, output);
     }
+
+    [Test]
+    public void AcceptInputSize()
+    {
+        var input =
+            "3 3\n" +
+            "...\n" +
+            "...\n" +
+            "...\n";
+
+        var expectedOutput =
+            "...\n" +
+            "...\n" +
+            "...\n";
+
+        string output = game.Process(input);
+
+        Assert.AreEqual(expectedOutput, output);
+    }
+
+    //
+    // [Test]
+    // public void ApplyNextGeneration_DeadCellsBecameAlive()
+    // {
+    //     var input =
+    //         "**.\n" +
+    //         "*..\n" +
+    //         "...\n";
+    //
+    //     var expectedOutput =
+    //         "**.\n" +
+    //         "**.\n" +
+    //         "...\n";
+    //
+    //     string output = game.Process(input);
+    //
+    //     Assert.AreEqual(expectedOutput, output);
+    // }
 }
